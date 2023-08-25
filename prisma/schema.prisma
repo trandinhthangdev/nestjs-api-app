@@ -9,3 +9,31 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id             Int      @id @default(autoincrement())
+  email          String   @unique
+  hashedPassword String
+  firstName      String? // can be null(optional)
+  lastName       String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  Note           Note[]
+
+  @@map("users") // users : table name in postgresQL
+}
+
+model Note {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  url         String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  //relationship
+  userId Int
+  user   User @relation(fields: [userId], references: [id])
+
+  @@map("notes")
+}
