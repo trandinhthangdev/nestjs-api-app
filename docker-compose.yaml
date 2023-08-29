@@ -13,3 +13,6 @@ services:
 networks:
   nestjs-networks:
 # docker compose up -d
+# docker-compose up -d nestjs-api-app_dev-database_1 -d
+
+# docker-compose rm nestjs-api-app_dev-database_1 --stop --force --volumes
